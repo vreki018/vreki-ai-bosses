@@ -1,0 +1,8 @@
+{
+ "boss_id": "Vesper_Bellwarden",
+ "name": "Vesper, the Last Bellwarden",
+ "spawn": [32, 1, 27],
+ "player_start": [32, 1, 50, 180],
+ "time": "night",
+ "summary": "Vesper was the bell-ringer of a cathedral that sank into a lake. He rang the great bell to warn the town, nobody listened, and the tower drowned with him inside. Now he wears a bell as his face, carries the great bell's iron clapper as a weapon and still warns before every blow: each attack starts with its own toll. Three phases: the warden (smash, whirl, shockwave tolls you must jump, bells falling from the sky, a chain hook against kiting), the cracked bell (double tolls, combos, and the Grand Toll - hide behind a stone pillar), and the broken bell (the burning heart inside is exposed: faster, triple tolls, leaps, bell storms)."
+}

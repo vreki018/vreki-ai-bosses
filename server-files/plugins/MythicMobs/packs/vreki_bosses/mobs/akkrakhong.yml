@@ -1,0 +1,143 @@
+AK_Akkrakhong:
+  Type: IRON_GOLEM
+  Display: '&3อัครฆ้อง &7• ผู้เก็บเสียงสุดท้าย'
+  Health: 780
+  Damage: 0
+  Faction: AK_Bell
+  Modules:
+    ThreatTable: true
+  Options:
+    MovementSpeed: 0.27
+    KnockbackResistance: 1
+    FollowRange: 60
+    MaxCombatDistance: 80
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Silent: true
+    Persistent: true
+    Despawn: false
+    PreventSunburn: true
+    Collidable: true
+  BossBar:
+    Enabled: true
+    Title: '&3อัครฆ้อง &8| &7ผู้เก็บเสียงสุดท้าย'
+    Range: 64
+    Color: BLUE
+    Style: SEGMENTED_10
+    DarkenSky: true
+  AIGoalSelectors:
+  - 0 clear
+  - 1 float
+  - 2 meleeattack
+  - 3 movetowardstarget
+  AITargetSelectors:
+  - 0 clear
+  - 1 players
+  Skills:
+  - skill{s=AK_Entrance;sync=true} @self ~onSpawn
+  - skill{s=AK_Brain;sync=true} @self ~onTimer:10
+  - cancelevent ~onAttack
+  - skill{s=AK_Hurt;sync=true} @self ~onDamaged
+  - skill{s=AK_Death;sync=true} @self ~onDeath
+  Drops:
+  - prismarine_crystals 12 1
+  - copper_ingot 32 1
+AK_EchoSeal:
+  Type: ARMOR_STAND
+  Health: 1
+  Options:
+    Silent: true
+    Invisible: true
+    Marker: true
+    HasGravity: false
+    Invincible: true
+    Persistent: true
+    Despawn: false
+    Collidable: false
+  Skills:
+  - skill{s=AK_SealLife;sync=true} @self ~onSpawn
+  - remove @self ~onSignal:AK_CLEAN
+AK_ReceiverLow:
+  Type: SLIME
+  Health: 1024
+  Damage: 0
+  Faction: AK_Bell
+  Options:
+    Size: 4
+    NoAI: true
+    HasGravity: false
+    MovementSpeed: 0
+    KnockbackResistance: 1
+    Collidable: true
+    Silent: true
+    Persistent: true
+    Despawn: false
+    PreventOtherDrops: true
+    PreventSlimeSplit: true
+  AIGoalSelectors:
+  - 0 clear
+  AITargetSelectors:
+  - 0 clear
+  Skills:
+  - potion{type=INVISIBILITY;duration=2147483647;level=0;particles=false;icon=false}
+    @self ~onSpawn
+  - skill{s=AK_ReceiverFollowLow;sync=true} @self ~onTimer:1
+  - skill{s=AK_ReceiverDamage;sync=true} @self ~onDamaged
+  - cancelevent ~onAttack
+  - remove @self ~onTimer:10 ?!isParentAlive
+AK_ReceiverMiddle:
+  Type: SLIME
+  Health: 1024
+  Damage: 0
+  Faction: AK_Bell
+  Options:
+    Size: 4
+    NoAI: true
+    HasGravity: false
+    MovementSpeed: 0
+    KnockbackResistance: 1
+    Collidable: true
+    Silent: true
+    Persistent: true
+    Despawn: false
+    PreventOtherDrops: true
+    PreventSlimeSplit: true
+  AIGoalSelectors:
+  - 0 clear
+  AITargetSelectors:
+  - 0 clear
+  Skills:
+  - potion{type=INVISIBILITY;duration=2147483647;level=0;particles=false;icon=false}
+    @self ~onSpawn
+  - skill{s=AK_ReceiverFollowMiddle;sync=true} @self ~onTimer:1
+  - skill{s=AK_ReceiverDamage;sync=true} @self ~onDamaged
+  - cancelevent ~onAttack
+  - remove @self ~onTimer:10 ?!isParentAlive
+AK_ReceiverHead:
+  Type: SLIME
+  Health: 1024
+  Damage: 0
+  Faction: AK_Bell
+  Options:
+    Size: 3
+    NoAI: true
+    HasGravity: false
+    MovementSpeed: 0
+    KnockbackResistance: 1
+    Collidable: true
+    Silent: true
+    Persistent: true
+    Despawn: false
+    PreventOtherDrops: true
+    PreventSlimeSplit: true
+  AIGoalSelectors:
+  - 0 clear
+  AITargetSelectors:
+  - 0 clear
+  Skills:
+  - potion{type=INVISIBILITY;duration=2147483647;level=0;particles=false;icon=false}
+    @self ~onSpawn
+  - skill{s=AK_ReceiverFollowHead;sync=true} @self ~onTimer:1
+  - skill{s=AK_ReceiverDamage;sync=true} @self ~onDamaged
+  - cancelevent ~onAttack
+  - remove @self ~onTimer:10 ?!isParentAlive

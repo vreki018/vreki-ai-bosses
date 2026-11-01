@@ -1,0 +1,414 @@
+AK_Entrance:
+  Skills:
+  - model{mid=akkrakhong;h=true;step=1;d=true} @self
+  - summon{type=AK_ReceiverLow;amount=1;radius=0;noise=0;ys=0;onSurface=false;sip=true} @selflocation
+  - summon{type=AK_ReceiverMiddle;amount=1;radius=0;noise=0;ys=0;onSurface=false;sip=true} @selflocation
+  - summon{type=AK_ReceiverHead;amount=1;radius=0;noise=0;ys=0;onSurface=false;sip=true} @selflocation
+  - brightness{mid=akkrakhong;b=13;s=13} @self
+  - brightness{mid=akkrakhong;pid=eyes;b=15;s=15} @self
+  - brightness{mid=akkrakhong;pid=core;b=14;s=14} @self
+  - setvariable{var=caster.phase;type=INTEGER;value=1} @self
+  - setvariable{var=caster.beat;type=INTEGER;value=0} @self
+  - setstance{s=entrance} @self
+  - setspeed{speed=0} @self
+  - gcd{ticks=100} @self
+  - look{headOnly=false;immediately=true} @NearestPlayer{r=60}
+  - sound{s=block.bell.resonate;p=0.6;v=2} @self
+  - sendtitle{title="&3อัครฆ้อง";subtitle="&7ผู้เก็บเสียงสุดท้าย";d=65;fi=15;fo=20} @pir{r=60}
+  - 'message{m="&7ค้อน: ถอย | วงเสียง: สลับระยะ | ผนึกใต้เท้า: วิ่งออก | ส้อม: โล่หรือเสา"} @pir{r=60}'
+  - delay 90
+  - skill{s=AK_Resume;sync=true} @self
+AK_Resume:
+  Conditions: &id003
+  - health{h=>0} true
+  Skills:
+  - setstance{s=ready} @self
+  - setspeed{speed=1} @self
+AK_Brain:
+  Conditions: &id001
+  - offgcd true
+  - stance{s=ready} true
+  - playerwithin{d=60} true
+  Skills:
+  - skill{s=AK_Phase2;sync=true} @self
+  - skill{s=AK_Phase3;sync=true} @self
+  - skill{s=AK_Beat0;sync=true} @self
+  - skill{s=AK_Beat1;sync=true} @self
+  - skill{s=AK_Beat2;sync=true} @self
+  - skill{s=AK_Beat3;sync=true} @self
+AK_Phase2:
+  Conditions:
+  - offgcd true
+  - stance{s=ready} true
+  - playerwithin{d=60} true
+  - health{h=<507} true
+  - variableEquals{var=caster.phase;value=1} true
+  Skills:
+  - gcd{ticks=100} @self
+  - setstance{s=casting} @self
+  - setspeed{speed=0} @self
+  - velocity{m=SET;x=0;y=0;z=0} @self
+  - setvariable{var=caster.beat;type=INTEGER;value=1} @self
+  - state{s=fracture;li=3;lo=5} @self
+  - setvariable{var=caster.phase;type=INTEGER;value=2} @self
+  - sound{s=block.beacon.deactivate;p=0.65;v=2} @self
+  - sound{s=block.amethyst_block.break;p=0.55;v=2} @self
+  - sendtitle{title="&3ผนึกแรกแตก";subtitle="&7จารึกสองวง • ช่องสวน 5 วินาที";d=65;fi=5;fo=15} @pir{r=60}
+  - delay 18
+  - partvisibility{mid=akkrakhong;pid=seal_0;visible=false} @self
+  - particles{p=block;material=WAXED_WEATHERED_CUT_COPPER;a=35;hs=1;vs=1;y=3} @self
+  - delay 82
+  - skill{s=AK_Resume;sync=true} @self
+AK_Phase3:
+  Conditions:
+  - offgcd true
+  - stance{s=ready} true
+  - playerwithin{d=60} true
+  - health{h=<234} true
+  - variableEquals{var=caster.phase;value=2} true
+  Skills:
+  - gcd{ticks=100} @self
+  - setstance{s=casting} @self
+  - setspeed{speed=0} @self
+  - velocity{m=SET;x=0;y=0;z=0} @self
+  - setvariable{var=caster.beat;type=INTEGER;value=1} @self
+  - state{s=fracture;li=3;lo=5} @self
+  - setvariable{var=caster.phase;type=INTEGER;value=3} @self
+  - sound{s=block.beacon.deactivate;p=0.65;v=2} @self
+  - sound{s=block.amethyst_block.break;p=0.55;v=2} @self
+  - sendtitle{title="&3เสียงสุดท้าย";subtitle="&7จารึกสามวง • หอกสองนัด";d=65;fi=5;fo=15} @pir{r=60}
+  - delay 18
+  - partvisibility{mid=akkrakhong;pid=seal_1;visible=false} @self
+  - particles{p=block;material=WAXED_WEATHERED_CUT_COPPER;a=35;hs=1;vs=1;y=3} @self
+  - partvisibility{mid=akkrakhong;pid=seal_2;visible=false} @self
+  - tint{mid=akkrakhong;pid=core;c=80FFE0} @self
+  - delay 82
+  - skill{s=AK_Resume;sync=true} @self
+AK_Beat0:
+  Conditions:
+  - offgcd true
+  - stance{s=ready} true
+  - playerwithin{d=60} true
+  - variableEquals{var=caster.beat;value=0} true
+  Skills:
+  - skill{s=AK_Hammer;sync=true} @self
+AK_Beat1:
+  Conditions:
+  - offgcd true
+  - stance{s=ready} true
+  - playerwithin{d=60} true
+  - variableEquals{var=caster.beat;value=1} true
+  Skills:
+  - skill{s=AK_Toll;sync=true} @self
+AK_Beat2:
+  Conditions:
+  - offgcd true
+  - stance{s=ready} true
+  - playerwithin{d=60} true
+  - variableEquals{var=caster.beat;value=2} true
+  Skills:
+  - skill{s=AK_Epitaph;sync=true} @self
+AK_Beat3:
+  Conditions:
+  - offgcd true
+  - stance{s=ready} true
+  - playerwithin{d=60} true
+  - variableEquals{var=caster.beat;value=3} true
+  Skills:
+  - skill{s=AK_Lance;sync=true} @self
+AK_Hammer:
+  Conditions:
+  - offgcd true
+  - stance{s=ready} true
+  - playerwithin{d=60} true
+  - targetwithin{d=8} orElseCast AK_HammerFar
+  Skills:
+  - gcd{ticks=62} @self
+  - setstance{s=casting} @self
+  - setspeed{speed=0} @self
+  - velocity{m=SET;x=0;y=0;z=0} @self
+  - setvariable{var=caster.beat;type=INTEGER;value=1} @self
+  - state{s=hammerfall;li=3;lo=5} @self
+  - sound{s=entity.iron_golem.repair;p=0.55;v=1.5} @self
+  - particlering{p=soul_fire_flame;r=6;points=60;a=1;hs=0;vs=0;y=0.15;repeat=4;repeatInterval=4} @self
+  - look{headOnly=false;immediately=true} @target
+  - delay 18
+  - sound{s=entity.player.attack.sweep;p=0.6;v=1.5} @self
+  - delay 4
+  - skill{s=AK_HammerImpact;sync=true} @self
+  - delay 40
+  - skill{s=AK_Resume;sync=true} @self
+AK_HammerFar:
+  Conditions: *id001
+  Skills:
+  - skill{s=AK_Procession;sync=true} @self
+AK_HammerImpact:
+  Conditions:
+  - health{h=>0} true
+  - stance{s=casting} true
+  Skills:
+  - sound{s=block.anvil.land;p=0.65;v=2} @self
+  - sound{s=entity.generic.explode;p=0.7;v=1} @self
+  - particlering{p=electric_spark;r=6;points=60;a=1;hs=0;vs=0;y=0.15;repeat=0;repeatInterval=4} @self
+  - skill{s=AK_HammerHit;sync=true} @pir{r=6}
+AK_HammerHit:
+  TargetConditions:
+  - gamemode{m=SPECTATOR} false
+  - gamemode{m=CREATIVE} false
+  - blocking false
+  Skills:
+  - damage{a=16;ia=true;is=false;pkb=true} @targeted
+  - throw{v=5;vy=2} @targeted
+AK_Procession:
+  Conditions: *id001
+  Skills:
+  - gcd{ticks=120} @self
+  - setstance{s=casting} @self
+  - setspeed{speed=0} @self
+  - velocity{m=SET;x=0;y=0;z=0} @self
+  - setvariable{var=caster.beat;type=INTEGER;value=1} @self
+  - state{s=procession;li=3;lo=5} @self
+  - sound{s=item.goat_horn.sound.0;p=0.65;v=2} @self
+  - message{m="&3ขบวนศพกำลังมา — เตรียมถอยจากค้อน"} @pir{r=60}
+  - delay 14
+  - skill{s=AK_ProcessionRun;sync=true} @self
+AK_ProcessionRun:
+  Conditions:
+  - health{h=>0} true
+  - stance{s=casting} true
+  Skills:
+  - skill{s=AK_ProcessionStep;sync=true;repeat=17;repeatInterval=2} @pir{r=60;sort=NEAREST;limit=1}
+  - delay 35
+  - skill{s=AK_ProcessionSlam;sync=true} @self
+AK_ProcessionStep:
+  Conditions:
+  - health{h=>0} true
+  - stance{s=casting} true
+  TargetConditions:
+  - gamemode{m=SPECTATOR} false
+  - gamemode{m=CREATIVE} false
+  - distance{d=>3.5} true
+  Skills:
+  - look{headOnly=false;immediately=true} @targeted
+  - lunge{v=.8;vy=0;old=true} @targeted
+AK_ProcessionSlam:
+  Conditions:
+  - health{h=>0} true
+  - stance{s=casting} true
+  Skills:
+  - setspeed{speed=0} @self
+  - velocity{m=SET;x=0;y=0;z=0} @self
+  - state{s=procession;r=true;lo=3} @self
+  - state{s=hammerfall;li=3;lo=5} @self
+  - sound{s=entity.iron_golem.repair;p=0.55;v=1.5} @self
+  - particlering{p=soul_fire_flame;r=6;points=60;a=1;hs=0;vs=0;y=0.15;repeat=5;repeatInterval=4} @self
+  - delay 22
+  - skill{s=AK_HammerImpact;sync=true} @self
+  - delay 40
+  - skill{s=AK_Resume;sync=true} @self
+AK_Toll:
+  Conditions: *id001
+  Skills:
+  - gcd{ticks=116} @self
+  - setstance{s=casting} @self
+  - setspeed{speed=0} @self
+  - velocity{m=SET;x=0;y=0;z=0} @self
+  - setvariable{var=caster.beat;type=INTEGER;value=2} @self
+  - state{s=resonance;li=3;lo=5} @self
+  - sound{s=block.bell.resonate;p=0.55;v=2} @self
+  - 'message{m="&3♫ สามเสียง: ออก → เข้า → ออก"} @pir{r=60}'
+  - particlering{p=soul_fire_flame;r=7;points=70;a=1;hs=0;vs=0;y=0.15;repeat=7;repeatInterval=4} @self
+  - delay 32
+  - skill{s=AK_TollInner;sync=true} @self
+  - particlering{p=soul_fire_flame;r=7;points=70;a=1;hs=0;vs=0;y=0.15;repeat=6;repeatInterval=4} @self
+  - particlering{p=soul_fire_flame;r=18;points=180;a=1;hs=0;vs=0;y=0.15;repeat=6;repeatInterval=4} @self
+  - delay 28
+  - skill{s=AK_TollOuter;sync=true} @self
+  - particlering{p=soul_fire_flame;r=7;points=70;a=1;hs=0;vs=0;y=0.15;repeat=6;repeatInterval=4} @self
+  - delay 28
+  - skill{s=AK_TollInner;sync=true} @self
+  - delay 28
+  - skill{s=AK_Resume;sync=true} @self
+AK_TollInner:
+  Conditions:
+  - health{h=>0} true
+  - stance{s=casting} true
+  Skills:
+  - sound{s=block.bell.use;p=0.65;v=2} @self
+  - particlering{p=electric_spark;r=7;points=70;a=1;hs=0;vs=0;y=0.15;repeat=0;repeatInterval=4} @self
+  - particles{p=flash;a=1;hs=0;vs=0;y=2.8} @self
+  - skill{s=AK_ResonanceHit;sync=true} @pir{r=7}
+AK_TollOuter:
+  Conditions:
+  - health{h=>0} true
+  - stance{s=casting} true
+  Skills:
+  - sound{s=block.bell.use;p=0.95;v=2} @self
+  - particlering{p=electric_spark;r=7;points=70;a=1;hs=0;vs=0;y=0.15;repeat=0;repeatInterval=4} @self
+  - particlering{p=electric_spark;r=18;points=180;a=1;hs=0;vs=0;y=0.15;repeat=0;repeatInterval=4} @self
+  - skill{s=AK_ResonanceHit;sync=true} @PRING{min=7;max=18}
+AK_ResonanceHit:
+  TargetConditions: &id002
+  - gamemode{m=SPECTATOR} false
+  - gamemode{m=CREATIVE} false
+  Skills:
+  - damage{a=16;ia=true;is=true;pkb=true} @targeted
+  - sound{s=block.amethyst_block.hit;p=0.65;v=1} @targeted
+AK_Epitaph:
+  Conditions: *id001
+  Skills:
+  - gcd{ticks=100} @self
+  - setstance{s=casting} @self
+  - setspeed{speed=0} @self
+  - velocity{m=SET;x=0;y=0;z=0} @self
+  - setvariable{var=caster.beat;type=INTEGER;value=3} @self
+  - state{s=epitaph;li=3;lo=5} @self
+  - sound{s=block.respawn_anchor.charge;p=0.7;v=2} @self
+  - delay 26
+  - skill{s=AK_PlaceSeal;sync=true} @self
+  - delay 18
+  - skill{s=AK_ExtraSeal2;sync=true} @self
+  - delay 18
+  - skill{s=AK_ExtraSeal3;sync=true} @self
+  - delay 38
+  - skill{s=AK_Resume;sync=true} @self
+AK_PlaceSeal:
+  Conditions:
+  - health{h=>0} true
+  - stance{s=casting} true
+  Skills:
+  - summon{type=AK_EchoSeal;amount=1;radius=0;noise=0;ys=0;onSurface=true;sip=true} @targetlocation
+AK_ExtraSeal2:
+  Conditions:
+  - variableInRange{var=caster.phase;value=2to3} true
+  Skills:
+  - skill{s=AK_PlaceSeal;sync=true} @self
+AK_ExtraSeal3:
+  Conditions:
+  - variableEquals{var=caster.phase;value=3} true
+  Skills:
+  - skill{s=AK_PlaceSeal;sync=true} @self
+AK_SealLife:
+  Skills:
+  - model{mid=echo_seal} @self
+  - brightness{mid=echo_seal;b=15;s=15} @self
+  - sound{s=block.amethyst_block.chime;p=1.6;v=1} @self
+  - particlering{p=soul_fire_flame;r=2.5;points=25;a=1;hs=0;vs=0;y=0.15;repeat=8;repeatInterval=4} @self
+  - delay 36
+  - sound{s=block.respawn_anchor.deplete;p=1.1;v=1.6} @self
+  - particles{p=soul_fire_flame;a=55;hs=1.8;vs=.6;speed=.04;y=.5} @self
+  - skill{s=AK_SealHit;sync=true} @pir{r=2.5}
+  - delay 4
+  - remove @self
+AK_SealHit:
+  TargetConditions: *id002
+  Skills:
+  - damage{a=14;ia=true;is=true;pkb=true} @targeted
+AK_Lance:
+  Conditions: *id001
+  Skills:
+  - setvariable{var=caster.beat;type=INTEGER;value=0} @self
+  - skill{s=AK_LanceBody;sync=true} @self
+AK_LanceBody:
+  Conditions: *id001
+  Skills:
+  - gcd{ticks=72} @self
+  - setstance{s=casting} @self
+  - setspeed{speed=0} @self
+  - velocity{m=SET;x=0;y=0;z=0} @self
+  - state{s=lance;li=3;lo=5} @self
+  - sound{s=block.beacon.power_select;p=0.7;v=2} @self
+  - particles{p=electric_spark;a=8;hs=.2;vs=.2;y=0;repeat=5;repeatInterval=4} @modelpart{mid=akkrakhong;pid=fork}
+  - look{headOnly=false;immediately=true} @target
+  - delay 26
+  - skill{s=AK_FireBolt;sync=true} @self
+  - delay 14
+  - skill{s=AK_EchoBolt;sync=true} @self
+  - delay 32
+  - skill{s=AK_Resume;sync=true} @self
+AK_FireBolt:
+  Conditions:
+  - health{h=>0} true
+  - stance{s=casting} true
+  Skills:
+  - sound{s=entity.breeze.shoot;p=0.75;v=1.8} @self
+  - projectile{oT=AK_BoltTrail;oH=AK_BoltHit;v=13;i=1;hR=.65;vR=1.2;mr=52;md=90;syo=2.8;sso=0;sfo=1.3;tyo=0;hs=false;sB=true;sE=true;hnp=false} @pir{r=60;sort=NEAREST;limit=1}
+AK_EchoBolt:
+  Conditions:
+  - variableEquals{var=caster.phase;value=3} true
+  Skills:
+  - sound{s=block.amethyst_block.chime;p=1.5;v=1.5} @self
+  - skill{s=AK_FireBolt;sync=true} @self
+AK_BoltTrail:
+  Skills:
+  - particles{p=soul_fire_flame;a=3;hs=.12;vs=.12;speed=0} @origin
+  - particles{p=electric_spark;a=2;hs=.06;vs=.06;speed=0} @origin
+AK_BoltHit:
+  Conditions: *id003
+  TargetConditions:
+  - gamemode{m=SPECTATOR} false
+  - gamemode{m=CREATIVE} false
+  - blocking false
+  Skills:
+  - damage{a=16;ia=true;is=false;pkb=true} @targeted
+  - sound{s=block.glass.break;p=0.75;v=1} @targeted
+AK_Hurt:
+  Cooldown: 0.8
+  Conditions:
+  - stance{s=ready} true
+  Skills:
+  - state{s=hurt;li=0;lo=2} @self
+  - sound{s=block.copper.hit;p=<random.float.0.65to0.75>;v=0.8} @self
+AK_Death:
+  Skills:
+  - setstance{s=dead} @self
+  - setspeed{speed=0} @self
+  - remove @children
+  - sound{s=block.bell.resonate;p=0.5;v=2} @self
+  - sound{s=block.beacon.deactivate;p=0.6;v=2} @self
+  - message{m="&7ระฆังเงียบลง… เป็นครั้งแรกในพันปี"} @pir{r=60}
+  - delay 90
+  - remove @self
+AK_ReceiverDamage:
+  Conditions:
+  - isParentAlive true
+  Skills:
+  - cancelevent
+  - skill{s=AK_ReceiverProjectile;sync=true} @self
+  - skill{s=AK_ReceiverMelee;sync=true} @self
+AK_ReceiverProjectile:
+  Conditions:
+  - isParentAlive true
+  - damagecause{cause=PROJECTILE} true
+  Skills:
+  - sudoskill{s=AK_ReceiverApply;sync=true;t=@parent} @trigger
+  - skill{s=AK_ConsumeArrow;sync=true} @eir{r=3;living=false}
+AK_ReceiverMelee:
+  Conditions:
+  - isParentAlive true
+  - damagecause{cause=ENTITY_ATTACK} true
+  Skills:
+  - sudoskill{s=AK_ReceiverApply;sync=true;t=@parent} @trigger
+AK_ReceiverApply:
+  Skills:
+  - damage{a=<skill.var.damage-amount>;ia=true;pkb=true;pi=false} @targeted
+AK_ConsumeArrow:
+  TargetConditions:
+  - entitytype{t=ARROW} true
+  Skills:
+  - remove @targeted
+AK_ReceiverFollowLow:
+  Conditions:
+  - isParentAlive true
+  Skills:
+  - teleport @parentlocation{y=2.2}
+AK_ReceiverFollowMiddle:
+  Conditions:
+  - isParentAlive true
+  Skills:
+  - teleport @parentlocation{y=4.15}
+AK_ReceiverFollowHead:
+  Conditions:
+  - isParentAlive true
+  Skills:
+  - teleport @parentlocation{y=5.95}

@@ -1,0 +1,10 @@
+{
+  "name": "vreki-ai-bosses",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Two Minecraft bosses made by ChatGPT and Claude (VreKi_ channel giveaway)",
+  "scripts": {
+    "test": "node --test tests/release.test.js"
+  },
+  "license": "MIT"
+}

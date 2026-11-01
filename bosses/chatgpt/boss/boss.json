@@ -1,0 +1,17 @@
+{
+  "boss_id": "AK_Akkrakhong",
+  "name": "อัครฆ้อง ผู้เก็บเสียงสุดท้าย",
+  "spawn": [
+    32,
+    1,
+    32
+  ],
+  "player_start": [
+    31.5,
+    1,
+    50.5,
+    180
+  ],
+  "time": "night",
+  "summary": "A bronze funeral bell that mistook the last heartbeat in its sanctuary for a summons. Three readable phases: hammer, pursuing funeral procession and three-note range dance; broken seal adds chained ground echoes; naked core adds a second ranged note. Original model, procedural hand-painted textures, eleven animations and a copper-ringed octagonal bell sanctuary."
+}
