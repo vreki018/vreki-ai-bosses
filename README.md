@@ -1,6 +1,6 @@
 # บอส Minecraft ที่ ChatGPT กับ Claude สร้างมาฆ่าผม — แจกฟรี
 
-บอสจาก **[คลิปของช่อง VreKi_](https://www.youtube.com/@VreKi_018/videos)** · ช่อง [VreKi_](https://www.youtube.com/@VreKi_018)
+บอสจาก **[คลิปของช่อง VreKi_](https://youtu.be/3xpNqZZMgls)** · ช่อง [VreKi_](https://www.youtube.com/@VreKi_018)
 
 💬 Discord ของช่อง: https://discord.gg/nZcYBwB5fc
 
